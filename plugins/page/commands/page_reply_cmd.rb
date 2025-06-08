@@ -20,12 +20,7 @@ module AresMUSH
       def required_args
         [ self.num, self.message ]
       end
-      
-      def check_guest
-        return t('dispatcher.not_allowed') if enactor.has_any_role?("guest")
-        return nil
-      end
-      
+            
       def handle
         
         thread = enactor.sorted_page_threads[self.num - 1]
@@ -44,6 +39,10 @@ module AresMUSH
         Page.send_page(enactor, result[:recipients], self.message, client)
         
         enactor.update(last_paged: names)
+      end
+      
+      def log_command
+        # Don't log pages
       end
     end
   end
