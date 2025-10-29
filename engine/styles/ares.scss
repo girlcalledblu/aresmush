@@ -2792,9 +2792,10 @@ LOCATIONS SCREEN
 }
 
 .location-legend {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    font-size: 0.9rem;
 }
 
 .location-buttons {
