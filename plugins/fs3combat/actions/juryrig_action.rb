@@ -56,12 +56,12 @@ module AresMUSH
        
                 self.combat.log "Juryrig: #{tech_model.name} repairing #{pilot_model.name}: #{successes}"
 
-                FS3Combat.heal(wound, 1)
-                    "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage."
                 FS3Combat.check_for_unko(pilot_model)
                     if (!self.combatant.is_npc?)
                   
-                Achievements.award_achievement(self.combatant.associated_model, "fs3_juryrigged")  
+                Achievements.award_achievement(self.combatant.associated_model, "fs3_juryrigged")
+                
+                return  "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage."
                end
            end
         end
