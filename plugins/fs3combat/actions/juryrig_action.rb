@@ -40,31 +40,31 @@ module AresMUSH
             end
             
            def resolve
-                    tech_model = self.combatant
-                    vehicle_model = self.combat.find_vehicle_by_name(self.action_args)
-                    pilot_model = vehicle_model.pilot
+                tech_model = self.combatant
+                vehicle_model = self.combat.find_vehicle_by_name(self.action_args)
+                pilot_model = vehicle_model.pilot
 
-                    if (!wound)
-                       return "#{tech_model.name} tried to repair #{vehicle_model.name} but it has no repairable damage."
-                    end
+                if (!wound)
+                   return "#{tech_model.name} tried to repair #{vehicle_model.name} but it has no repairable damage."
+                end
+               
+                 skill = FS3Combat.juryrig_skill 
        
-                    skill = FS3Combat.juryrig_skill 
-       
-                    roll = tech_model.roll_ability("Technician")
-                    successes = roll[:successes]
+                roll = tech_model.roll_ability("Technician")
+                successes = roll[:successes]
 
-                    if (successes <= 0)
-                       return "#{tech_model.name} failed to repair #{pilot_model.name}."
-                    end
+                if (successes <= 0)
+                 return "#{tech_model.name} failed to repair #{pilot_model.name}."
+                end
        
-                    self.combat.log "Juryrig: #{tech_model.name} repairing #{pilot_model.name}: #{roll}"
+                self.combat.log "Juryrig: #{tech_model.name} repairing #{pilot_model.name}: #{roll}"
 
-                    FS3Combat.heal(wound, 1)
-                        "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage."
-                    FS3Combat.check_for_unko(pilot_model)
-                      if (!self.combatant.is_npc?)
+                FS3Combat.heal(wound, 1)
+                    "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage."
+                FS3Combat.check_for_unko(pilot_model)
+                    if (!self.combatant.is_npc?)
                   
-                    Achievements.award_achievement(self.combatant.associated_model, "fs3_juryrigged")  
+                Achievements.award_achievement(self.combatant.associated_model, "fs3_juryrigged")  
                end
            end
         end
