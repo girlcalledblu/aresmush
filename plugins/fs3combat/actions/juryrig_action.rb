@@ -27,7 +27,6 @@ module AresMUSH
                     return t('fs3combat.patient_must_pass')
                 end
 
-                self.combat.find_vehicle_by_name(name) = vehicle
                 return nil
             end
             
