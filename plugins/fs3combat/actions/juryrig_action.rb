@@ -54,7 +54,7 @@ module AresMUSH
                  return "#{tech_model.name} failed to repair #{pilot_model.name}."
                 end
        
-                self.combat.log "Juryrig: #{tech_model.name} repairing #{pilot_model.name}: #{roll}"
+                self.combat.log "Juryrig: #{tech_model.name} repairing #{pilot_model.name}: #{successes}"
 
                 FS3Combat.heal(wound, 1)
                     "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage."
