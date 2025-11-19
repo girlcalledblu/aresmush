@@ -61,7 +61,8 @@ module AresMUSH
                   
                 Achievements.award_achievement(self.combatant.associated_model, "fs3_juryrigged")
 
-                return [  "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage." ]
+                FS3Combat.heal(wound, 1)
+                    return [  "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage." ]
                end
            end
         end
