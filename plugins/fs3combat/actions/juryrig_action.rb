@@ -42,7 +42,7 @@ module AresMUSH
                 tech_model = self.combatant
                 vehicle_model = self.combat.find_vehicle_by_name(self.action_args)
                 pilot_model = vehicle_model.pilot
-                wound = FS3Combat.worst_treatable_wound(find_vehicle_by_name)
+                wound = FS3Combat.worst_treatable_wound(combat.find_vehicle_by_name)
 
                 if (!wound)
                    return "#{tech_model.name} tried to repair #{vehicle_model.name} but it has no repairable damage."
