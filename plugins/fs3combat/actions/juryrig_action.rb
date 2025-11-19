@@ -63,7 +63,6 @@ module AresMUSH
 
                 FS3Combat.heal(wound, 1)
                     return [  "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage." ]
-               end
            end
         end
     end
