@@ -47,14 +47,14 @@ module AresMUSH
                 if (!wound)
                    return "#{tech_model.name} tried to repair #{vehicle_model.name} but it has no repairable damage."
                 end
-       
-                skill = FS3Combat.juryrig_skill 
+               
+                 skill = FS3Combat.juryrig_skill 
        
                 roll = tech_model.roll_ability("Technician")
                 successes = roll[:successes]
 
                 if (successes <= 0)
-                   return "#{tech_model.name} failed to repair #{pilot_model.name}."
+                 return "#{tech_model.name} failed to repair #{pilot_model.name}."
                 end
        
                 self.combat.log "Juryrig: #{tech_model.name} repairing #{pilot_model.name}: #{roll}"
@@ -62,7 +62,7 @@ module AresMUSH
                 FS3Combat.heal(wound, 1)
                     "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage."
                 FS3Combat.check_for_unko(pilot_model)
-                  if (!self.combatant.is_npc?)
+                    if (!self.combatant.is_npc?)
                   
                 Achievements.award_achievement(self.combatant.associated_model, "fs3_juryrigged")  
                end
