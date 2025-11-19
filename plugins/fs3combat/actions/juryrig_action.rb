@@ -27,7 +27,7 @@ module AresMUSH
                     return t('fs3combat.patient_must_pass')
                 end
 
-                self.target = vehicle
+                self.action_args = vehicle
                 return nil
             end
             
