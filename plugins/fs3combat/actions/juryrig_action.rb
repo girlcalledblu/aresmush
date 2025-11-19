@@ -48,7 +48,7 @@ module AresMUSH
                    return "#{tech_model.name} tried to repair #{vehicle_model.name} but it has no repairable damage."
                 end
        
-                success = tech_model.roll_ability("Technician")
+                successes = tech_model.roll_ability("Technician")
 
                 if (successes <= 0)
                  return "#{tech_model.name} failed to repair #{pilot_model.name}."
