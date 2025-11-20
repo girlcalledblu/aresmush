@@ -45,24 +45,25 @@ module AresMUSH
                 wound = FS3Combat.worst_treatable_wound(self.combat.find_vehicle_by_name(self.action_args))
 
                 if (!wound)
-                   return "#{tech_model.name} tried to repair #{vehicle_model.name} but it has no repairable damage."
+                   return "#{tech_model.name} tried to repair #{vehicle_model.name} (#{pilot_model.name}) but it has no repairable damage."
                 end
        
                 successes = tech_model.roll_ability("Technician")
 
                 if (successes <= 0)
-                 return "#{tech_model.name} failed to repair #{pilot_model.name}."
+                 return "#{tech_model.name} failed to repair #{vehicle_model.name} (#{pilot_model.name})."
                 end
        
-                self.combat.log "Juryrig: #{tech_model.name} repairing #{pilot_model.name}: #{successes}"
+                self.combat.log "Juryrig: #{tech_model.name} repairing #{vehicle_model.name} (#{pilot_model.name}): #{successes}"
 
                 FS3Combat.check_for_unko(pilot_model)
                     if (!self.combatant.is_npc?)
+                  
                 Achievements.award_achievement(self.combatant.associated_model, "fs3_juryrigged")
                end
-
+                
                 FS3Combat.heal(wound, 1)
-                    return [  "#{tech_model.name} successfully repaired #{pilot_model.name} worst damage." ]
+                    return [  "#{tech_model.name} successfully repaired #{vehicle_model.name} (#{pilot_model.name}) worst damage." ]
            end
         end
     end
