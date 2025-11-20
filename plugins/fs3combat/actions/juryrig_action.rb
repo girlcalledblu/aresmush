@@ -31,7 +31,7 @@ module AresMUSH
             end
             
             def print_action
-                "#{self.combatant.name} will juryrig #{self.action_args} (#{vehicle.pilot}) this turn."
+                "#{self.combatant.name} will juryrig #{self.action_args} this turn."
             end
             
             def print_action_short
