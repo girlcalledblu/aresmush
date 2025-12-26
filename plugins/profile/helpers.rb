@@ -48,6 +48,26 @@ module AresMUSH
       FileUtils.mv(old_folder, new_folder)
     end
     
+    def self.export_wiki(model, client = nil)
+      if (model.wiki_char_backup)
+        if (client)
+          client.emit_ooc t('profile.wiki_backup_avail', :path => model.wiki_char_backup.download_path)
+        end
+        return nil
+      end
+      
+      Global.dispatcher.queue_timer(1, "Wiki backup #{model.name}", client) do
+        error = Website.export_char(model)
+        if (client)
+          if (error)
+            client.emit_failure t('profile.wiki_backup_failed', :error => error)
+          else
+            client.emit_ooc t('profile.wiki_backup_created', :path => model.wiki_char_backup.download_path)
+          end
+        end
+      end
+    end
+    
     def self.get_profile_status_message(char)
       case char.idle_state
       when "Roster"
