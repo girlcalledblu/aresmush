@@ -2536,6 +2536,15 @@ CHAT SCREEN
   padding: 0px 15px 0px 0px;
 }
 
+.chat-join-note {
+  margin: 5px;  
+}
+
+.chat-msg-flagged {
+  border: 1px solid $border-color;
+  background-color: $box-background-color;
+}
+
 .play-section-title {
   font-variant: small-caps;
   margin: 10px 5px 5px 5px;
