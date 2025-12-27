@@ -1,8 +1,21 @@
 module AresMUSH
   module Profile
     def self.relationships_by_category(char)
-      relations = char.relationships.group_by { |name, data| data['category'] }
-      relations.sort_by { |category, relations| Profile.category_order(char, category) }
+      groups = {}
+      char.relationships.each do |name, rel|
+        categories = (rel['category'] || "None").split(",")
+        categories.each do |cat|
+          if (!groups.has_key?(cat))
+            groups[cat] = {}
+          end
+          groups[cat][name] = rel
+        end
+      end
+      groups.sort_by { |category, relations| Profile.category_order(char, category) }
+
+      
+      #relations = char.relationships.group_by { |name, data| data['category'] }
+      #relations.sort_by { |category, relations| Profile.category_order(char, category) }
     end
     
     def self.category_order(char, category)
