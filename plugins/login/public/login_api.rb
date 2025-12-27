@@ -69,9 +69,8 @@ module AresMUSH
     def self.set_random_password(char)
       password = Login.generate_random_password
       char.change_password(password)
-      char.update(login_api_token: '')
-      char.update(login_api_token_expiry: Time.now - 86400*5)
-      char.update(login_failures: 0)      
+      char.update(login_failures: 0)
+      Login.expire_web_login(char)
       password
     end
     
