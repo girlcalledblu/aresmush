@@ -17,7 +17,12 @@ module AresMUSH
           if (self.game_export)
             self.export_game(model)
           else
-            Profile.export_wiki(model, client)
+            error = Profile.export_wiki_char(model)
+            if (error)
+              client.emit_failure error
+            else
+              client.emit_success t('profile.wiki_backup_in_progress')
+            end
           end          
           
         end

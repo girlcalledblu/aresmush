@@ -74,6 +74,7 @@ module AresMUSH
       password
     end
     
+    # Creates a bell notification - does NOT emit any messages to online chars
     def self.notify(char, type, message, reference_id, data = "", notify_if_online = true)
       unless notify_if_online
         status = Website.activity_status(char)

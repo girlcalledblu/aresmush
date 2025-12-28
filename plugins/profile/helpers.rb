@@ -61,24 +61,37 @@ module AresMUSH
       FileUtils.mv(old_folder, new_folder)
     end
     
-    def self.export_wiki(model, client = nil)
+    def self.export_wiki_char(model)
       if (model.wiki_char_backup)
-        if (client)
-          client.emit_ooc t('profile.wiki_backup_avail', :path => model.wiki_char_backup.download_path)
-        end
-        return nil
+        return t('profile.wiki_backup_avail', :path => model.wiki_char_backup.download_path)
       end
       
-      Global.dispatcher.queue_timer(1, "Wiki backup #{model.name}", client) do
+      if (Time.now - (model.profile_last_backup || 0) < 86400)
+        return t('profile.wiki_backup_too_soon')
+      end
+          
+      model.update(profile_last_backup: Time.now)
+      
+      Global.dispatcher.queue_timer(1, "Wiki backup #{model.name}", nil) do
         error = Website.export_char(model)
-        if (client)
-          if (error)
-            client.emit_failure t('profile.wiki_backup_failed', :error => error)
-          else
-            client.emit_ooc t('profile.wiki_backup_created', :path => model.wiki_char_backup.download_path)
-          end
+        if (error)
+          model.update(profile_last_backup: nil)
+          Login.notify model, :backup, t('profile.wiki_backup_failed', :error => error), ''
+        else
+          message = t('profile.wiki_backup_created', :path => model.wiki_char_backup.download_path, :hours => WikiCharBackup.retention_hours)
+          Login.notify model, :backup, message, ''
+          Login.emit_if_logged_in(model, message)
         end
       end
+      
+      return nil
+    end
+    
+    def self.reset_wiki_backup(char)
+      if (char.wiki_char_backup)
+        char.wiki_char_backup.delete
+      end
+      char.update(profile_last_backup: nil)
     end
     
     def self.get_profile_status_message(char)

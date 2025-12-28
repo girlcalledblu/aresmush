@@ -22,7 +22,11 @@ module AresMUSH
           return { error: t('dispatcher.not_allowed') }
         end
 
-        Profile.export_wiki(char)
+        error = Profile.export_wiki_char(char)
+        if (error)
+          return { error: error }
+        end
+        
         {    
         }
       end
