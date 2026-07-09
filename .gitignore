@@ -47,3 +47,4 @@ killares
 # Game directory
 # -----------------------------
 /game/
+!/game/config/emblem.yml
