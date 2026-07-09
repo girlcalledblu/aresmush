@@ -3,7 +3,7 @@ module AresMUSH
     class EmblemSetCmd
       include CommandHandler
       
-      attr_accessor :name
+      attr_accessor :name, :emblem
       
       def parse_args
         args = cmd.parse_args(ArgParser.arg1_equals_arg2)
