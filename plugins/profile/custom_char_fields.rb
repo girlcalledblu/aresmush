@@ -14,7 +14,7 @@ module AresMUSH
       #    return { goals: Website.format_markdown_for_html(char.goals) }
       def self.get_fields_for_viewing(char, viewer)
         return {
-          emblem: Character.derive_emblem(char).gsub(" ","-")
+          emblem: (Character.derive_emblem(char) || "").gsub(" ","-")
         }
       end
     
