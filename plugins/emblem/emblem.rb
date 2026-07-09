@@ -20,6 +20,8 @@ module AresMUSH
       case cmd.switch
       when "set"
         return EmblemSetCmd
+      when "remove"
+        return EmblemRemoveCmd
       when nil
         return EmblemCmd
       end

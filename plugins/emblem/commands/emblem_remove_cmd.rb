@@ -1,14 +1,12 @@
 module AresMUSH
   module Emblem
-    class EmblemSetCmd
+    class EmblemRemoveCmd
       include CommandHandler
       
-      attr_accessor :name, :emblem
+      attr_accessor :name
       
       def parse_args
-        args = cmd.parse_args(ArgParser.arg1_equals_arg2)
-        self.name = args.arg1
-        self.emblem = args.arg2
+        self.name = cmd.args
       end
       
       def required_args
@@ -23,8 +21,8 @@ module AresMUSH
         end
         char_to_update = result.target
 
-        char_to_update.update(emblem: self.emblem)
-        client.emit_success t('emblem.emblem_added', :name => self.name, :emblem => self.emblem)
+        char_to_update.update(emblem: nil)
+        client.emit_success t('emblem.emblem_removed', :name => self.name)
       end
     end
   end
