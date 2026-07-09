@@ -1,4 +1,5 @@
 ---
 emblem:
-  field_type:
-  field:
+  field_type: Demographic
+  field: gender
+
