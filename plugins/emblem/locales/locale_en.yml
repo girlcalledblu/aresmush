@@ -1,0 +1,4 @@
+en:
+    emblem:
+        emblem_added: "%{name}'s emblem has been set to %{emblem}."
+        emblem_removed: "%{name}'s emblem has been removed."
